@@ -1,12 +1,10 @@
 
-import { Button, FormControl } from "@mui/material"
+import { Button as Btn, ButtonProps, FormControl } from "@mui/material"
 type Props = {
     text: string
-    clicked: () => void
+} & ButtonProps
+export const Button = ({ text, ...props }: Props) => {
+    return <FormControl>
+        <Btn {...props}>{text}</Btn>
+    </FormControl>
 }
-const MyButton = ({ clicked, text }: Props) => {
-    return <Button onClick={() => clicked()}>{text}</Button>
-    // return <FormControl>
-    // </FormControl>
-}
-export { MyButton as Button };

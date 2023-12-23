@@ -1,26 +1,23 @@
 import * as React from 'react';
 import DialogTitle from '@mui/material/DialogTitle';
-import Dialog from '@mui/material/Dialog';
+import { Dialog as D } from '@mui/material';
 
 
 export interface SimpleDialogProps {
   open: boolean;
   children: React.ReactNode;
   title: string;
-  onClose: (value: string) => void;
 }
 
-const MyDialog = (props: SimpleDialogProps) => {
+export const Dialog = (props: SimpleDialogProps) => {
   const { children, open } = props;
 
 
   return (
-    <Dialog fullWidth={true}
+    <D fullWidth={true}
       maxWidth={"lg"} open={open}>
       <DialogTitle sx={{ m: 0, p: 2 }}>{props.title}</DialogTitle>
       {children}
-    </Dialog>
+    </D>
   );
 }
-
-export { MyDialog as Dialog }
