@@ -4,7 +4,8 @@ import { useState } from "react";
 
 
 export const SliderPaging = ({ onPageChanged, currentPage, pageCount, ...props }: PagingProps & SliderOwnProps) => {
-    const marks = [...Array(pageCount)].map((_, a) => { return { label: `${a + 1}`, value: a }; });
+
+    const marks = pageCount <= 50 ? [...Array(pageCount)].map((_, a) => { return { label: `${a + 1}`, value: a }; }) : undefined;
     const [page, setPage] = useState(currentPage)
     return <Slider
         disableSwap step={null} min={0} max={pageCount - 1}

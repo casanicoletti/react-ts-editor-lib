@@ -20,3 +20,15 @@ export const LinearButtonPaging = ({ onPageChanged, currentPage, pageCount, sele
     });
     return pageLinks;
 };
+export const PreviousNextPageRenderer = ({ onPageChanged, currentPage, pageCount, ...props }: PagingProps & ButtonOwnProps) => {
+    return <>
+        <Button sx={{ p: 1, m: 1 }}
+            onClick={() => onPageChanged(currentPage - 1)}
+            disabled={currentPage == 0}
+        >Page {currentPage + 1}</Button>
+        <Button sx={{ p: 1, m: 1 }}
+            onClick={() => onPageChanged(currentPage + 1)}
+            disabled={currentPage == pageCount}
+        >Page {currentPage + 2}</Button>
+    </>
+}

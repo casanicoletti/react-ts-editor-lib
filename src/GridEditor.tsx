@@ -16,7 +16,7 @@ export type GridProps<T> = {
     items?: PaginatedResult<T>
     ItemsRenderer: RendererType<RendererProps<T>>
     pageChanged: (page: number) => void
-    PageRenderer?: RendererType<PagingProps>
+    PageRenderer: RendererType<PagingProps>
 } & ActionProps<T>;
 
 export type RendererProps<T> = {
@@ -30,7 +30,7 @@ export const Pagers = { SliderPaging, LinearButtonPaging }
 
 export const ItemsRenderer = { Table: TableRenderer, Card: PaperList }
 
-export const GridEditor = <TObject,>({ PageRenderer = Pagers.LinearButtonPaging, ItemsRenderer, items, pageSize, pageChanged, ...props }: GridProps<TObject>) => {
+export const GridEditor = <TObject,>({ PageRenderer, ItemsRenderer, items, pageSize, pageChanged, ...props }: GridProps<TObject>) => {
     const [page, setPage] = useState(0);
     const onPageChanged = (p: number) => {
         setPage(p)

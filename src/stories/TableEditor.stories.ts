@@ -15,7 +15,7 @@ const meta: Meta<typeof GridTable> = {
 export default meta;
 export const Primary: Story = {
     args: {
-        pageSize: 10,
-        tableMode: true
+        pageSize: 50,
+        tableMode: true,
     }
 }

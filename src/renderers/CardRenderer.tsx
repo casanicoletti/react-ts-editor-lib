@@ -70,7 +70,7 @@ const Card = <T,>({ elevation = 3, HeaderColumn, MainText, Actions = CrudActions
         </Grid>
     </Item >
 }
-type PaperListRendererProps<T> = {
+export type PaperListRendererProps<T> = {
     items: T[]
 } & CardRenderProps<T>
 type CardRenderProps<T> = {
@@ -79,9 +79,9 @@ type CardRenderProps<T> = {
     MainText: (props: { item: T }) => ReactNode,
     Actions?: (props: { item: T } & ActionProps<T>) => ReactNode
 
-} & ActionProps<T>
+} & ActionProps<T> & PaperOwnProps
 
-export const PaperList = <T,>({ items, ...props }: PaperListRendererProps<T> & PaperOwnProps) => {
+export const PaperList = <T,>({ items, ...props }: PaperListRendererProps<T>) => {
     const output = items.map(a => {
         return <Card {...props} key={props.idRender(a)} item={a} />
     });

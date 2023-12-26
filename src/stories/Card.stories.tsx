@@ -1,16 +1,31 @@
 import * as React from 'react'
 import { Meta, StoryObj } from '@storybook/react'
-import { PaperList, CrudActions } from '../renderers/CardRenderer';
-type ItemType = { id: string, data: string };
-const items: ItemType[] = [
-    { id: "198765", data: "Thats an awesome way to run" },
-    { id: "5000", data: "Thats an awesome way to run" },
-]
+import { PaperList, CrudActions, PaperListRendererProps } from '../renderers/CardRenderer';
+import { WithQueryClient } from './WithQueryClient';
+import { useGamesDatasource } from './dataSourceFetcher';
+type ItemType = {
+    id: string
+    name: string
 
-type Story = StoryObj<typeof PaperList<ItemType>>
-const meta: Meta<typeof PaperList<ItemType>> = {
+}
+const WithComponent = (props: PaperListRendererProps<ItemType>) => {
+
+    return <WithQueryClient>
+        <Component {...props} />
+    </WithQueryClient>
+}
+const Component = (props: PaperListRendererProps<ItemType>) => {
+    const data = useGamesDatasource<ItemType>();
+    if (data.data === undefined) {
+        return <></>
+    }
+    return <PaperList {...props} items={data.data!} />
+}
+
+type Story = StoryObj<typeof WithComponent>
+const meta: Meta<typeof WithComponent> = {
     tags: ["autodocs"],
-    component: PaperList<ItemType>,
+    component: WithComponent,
     title: "My/Card",
     argTypes: {
         onAction: { action: "action" }
@@ -20,10 +35,9 @@ const meta: Meta<typeof PaperList<ItemType>> = {
 export default meta;
 export const Primary: Story = {
     args: {
-        items: items,
-        HeaderColumn: e => e.item.id,
+        HeaderColumn: ({ item }) => item.id,
         idRender: e => e.id,
-        MainText: e => e.item.data,
+        MainText: ({ item }) => item.name,
         variant: "elevation",
         elevation: 3,
         Actions: (props) => (<CrudActions<ItemType> {...props}
