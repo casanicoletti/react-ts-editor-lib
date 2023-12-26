@@ -18,7 +18,7 @@ export const LinearButtonPaging = ({ onPageChanged, currentPage, pageCount, sele
             variant={a == state ? selectedVariant : props.variant}
         >{(a + 1).toString()}</Button>);
     });
-    return pageLinks;
+    return <>{pageLinks}</>;
 };
 export const PreviousNextPageRenderer = ({ onPageChanged, currentPage, pageCount, ...props }: PagingProps & ButtonOwnProps) => {
     return <>
