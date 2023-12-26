@@ -3,7 +3,7 @@ import { PagingProps } from "../renderers/PagingProps";
 import { useState } from "react";
 
 export const LinearButtonPaging = ({ onPageChanged, currentPage, pageCount, selectedVariant = "contained", ...props }: PagingProps & ButtonOwnProps & {
-    selectedVariant: "text" | "contained" | "outlined"
+    selectedVariant?: "text" | "contained" | "outlined"
 }) => {
     const [state, setState] = useState(currentPage)
     const pageLinks = [...Array(pageCount)].map((_, a) => {
